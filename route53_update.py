@@ -12,6 +12,11 @@ import argparse
 
 
 class Route53ChangeBatch:
+    """
+    changeBatch class...
+    """
+
+    # TODO: make this useful
     def __init__(self):
         Name = ''
         Type = ''
