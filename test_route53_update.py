@@ -65,7 +65,7 @@ class TestMain(unittest.TestCase):
 
         try:
             # execute
-            boto3.set_stream_logger('botocore', level=logging.DEBUG)
+            # boto3.set_stream_logger('botocore', level=logging.DEBUG)
             actual = route53_update.get_route53_client(key=creds.aws_access_key_id, secret=creds.aws_secret_access_key)
 
             # assert

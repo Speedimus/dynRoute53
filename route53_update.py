@@ -91,6 +91,12 @@ def get_aws_session(aws_access_key_id=None, aws_secret_access_key=None):
 
 
 def get_route53_client(key=None, secret=None):
+    """
+    Creates Route53 client
+    :param aws_access_key_id: if None, boto3 credential look-up mechanisms are used
+    :param aws_secret_access_key: if None, boto3 credential look-up mechanisms are used
+    :return: Session.client('route53') object
+    """
     result = None
     try:
         result = get_aws_session(aws_access_key_id=key, aws_secret_access_key=secret).client('route53')
@@ -101,6 +107,9 @@ def get_route53_client(key=None, secret=None):
 
 
 def get_route53_record(zone_id, host, record_type, key=None, secret=None):
+    """
+
+    """
     result = None
 
     route53 = get_route53_client(key=key, secret=secret)
