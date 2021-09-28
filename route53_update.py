@@ -60,7 +60,7 @@ def list_local_interfaces():
 def get_local_ip(interface_name):
     """
     This function accepts the name of a local interface and returns the last IP address associated with it.
-    :interface: str;
+    :interface: str; ID string of the local network interface who's IP will be used to update route53
     :return: str; the IP address of the local interface
     """
     result = None
@@ -98,8 +98,8 @@ def get_aws_session(aws_access_key_id=None, aws_secret_access_key=None):
 def get_route53_client(key=None, secret=None):
     """
     Creates Route53 client
-    :param aws_access_key_id: if None, boto3 credential look-up mechanisms are used
-    :param aws_secret_access_key: if None, boto3 credential look-up mechanisms are used
+    :param key: str: aws_access_key_id: if None, boto3 credential look-up mechanisms are used
+    :param secret: str: aws_secret_access_key: if None, boto3 credential look-up mechanisms are used
     :return: Session.client('route53') object
     """
     result = None
@@ -114,6 +114,9 @@ def get_route53_client(key=None, secret=None):
 def get_route53_record(zone_id, host, record_type, key=None, secret=None):
     """
     gets Route53 record
+    :param zone_id: str: route53 zone ID
+    :param host: str: FQDN of the host record to update in route53
+    :param record_type: str: DNS resource record type (default of 'A')
     :param key: aws_access_key_id; if None, boto3 credential look-up mechanisms are used
     :param secret: aws_secret_access_key; if None, boto3 credential look-up mechanisms are used
     :return: ResourceRecordSet object
