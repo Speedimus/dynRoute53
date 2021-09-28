@@ -108,7 +108,10 @@ def get_route53_client(key=None, secret=None):
 
 def get_route53_record(zone_id, host, record_type, key=None, secret=None):
     """
-
+    gets Route53 record
+    :param key: aws_access_key_id; if None, boto3 credential look-up mechanisms are used
+    :param secret: aws_secret_access_key; if None, boto3 credential look-up mechanisms are used
+    :return: ResourceRecordSet object
     """
     result = None
 
@@ -122,6 +125,16 @@ def get_route53_record(zone_id, host, record_type, key=None, secret=None):
 
 
 def update_route53_record(zone_id, host, record_type, new_ip, key=None, secret=None):
+    """
+    updates Route53 record
+    :param zone_id: str: route53 zone ID
+    :param host: str: FQDN of the host record to update in route53
+    :param record_type: str: DNS resource record type (default of 'A')
+    :param new_ip: str: IP address to put into the resource record
+    :param key: aws_access_key_id; if None, boto3 credential look-up mechanisms are used
+    :param secret: aws_secret_access_key; if None, boto3 credential look-up mechanisms are used
+    :return: response of call to route53 (probably nothing)
+    """
     result = None
     change_batch = {
         "Comment": "Updated from boto3",
@@ -152,6 +165,15 @@ def update_route53_record(zone_id, host, record_type, new_ip, key=None, secret=N
 
 
 def get_route53_ip(zone_id, host, record_type, key=None, secret=None):
+    """
+    extracts IP address from ResourceRecordSet object
+    :param zone_id: str: route53 zone ID
+    :param host: str: FQDN of the host record to update in route53
+    :param record_type: str: DNS resource record type (default of 'A')
+    :param key: aws_access_key_id; if None, boto3 credential look-up mechanisms are used
+    :param secret: aws_secret_access_key; if None, boto3 credential look-up mechanisms are used
+    :return: str: IP address
+    """
     result = None
     try:
         record = get_route53_record(zone_id=zone_id, host=host.lower(), record_type=record_type, key=key, secret=secret)
